@@ -47,6 +47,10 @@ export default function Home() {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
+          Bem vindo ao Siglot
+        </Typography>
+        <br />
+        <Typography component="h1" variant="h5">
           Entrar
         </Typography>
         <form className={classes.form} noValidate>
@@ -55,10 +59,10 @@ export default function Home() {
             margin="normal"
             required
             fullWidth
-            id="email"
+            id="matricula"
             label="Matricula"
-            name="email"
-            autoComplete="email"
+            name="matricula"
+            autoComplete="matricula"
             autoFocus
           />
           <TextField
@@ -88,18 +92,18 @@ export default function Home() {
           <Grid container>
             <Grid item xs>
               <Link href="#" variant="body2">
-                Esqueceu a Senha?
+                {'Esqueceu a Senha?'}
               </Link>
             </Grid>
             <Grid item>
-              <Link href='#' variant="body2">
-                {" Cadastre-se"}
+              <Link href='../../Cadastro/Loterica' variant="body2">
+                {"Cadastre-se"}
               </Link>
             </Grid>
           </Grid>
         </form>
       </div>
-      <Box mt={8}>
+      <Box mt={6}>
         <Copyright />
       </Box>
     </Container>
