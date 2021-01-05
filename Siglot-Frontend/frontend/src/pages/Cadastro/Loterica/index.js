@@ -40,12 +40,14 @@ export default class Cadastro extends Component {
       successful: false
     }
 
+
   }
 
   onChangeNomeLoterica(e) {
     this.setState({
       nameLoterica: e.target.value
     });
+    console.log('nome:', this.onChangeNomeLoterica);
   }
 
   onChangeCodConvenio(e) {
@@ -163,7 +165,7 @@ export default class Cadastro extends Component {
                   id="matriculaGerente"
                   label="Matricula Gerente"
                   autoFocus
-                  value={this.state.codConvenio}
+                  value={this.state.matriculaGerente}
                   onChange={this.onChangeMatrGerente}
                 />
               </Grid>

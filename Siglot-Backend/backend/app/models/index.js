@@ -1,13 +1,13 @@
-import { DB, USER, PASSWORD, HOST, dialect as _dialect } from '../config/db.config';
+const config = require('../config/db.config');
 
-import Sequelize from 'sequelize';
+const Sequelize = require('sequelize');
 const sequelize = new Sequelize(
-  DB,
-  USER,
-  PASSWORD,
+  config.DB,
+  config.USER,
+  config.PASSWORD,
   {
-    host: HOST,
-    dialect: _dialect,
+    host: config.HOST,
+    dialect: config.dialect,
     operatorAliases: false
   }
 );
@@ -34,4 +34,4 @@ db.user.belongsToMany(db.role, {
 
 db.ROLES = ["user", "admin", "moderator"];
 
-export default db;
+module.exports = db;

@@ -1,4 +1,4 @@
-export default (sequelize, Sequelize) => {
+module.exports = (sequelize, Sequelize) => {
   const Role = sequelize.define('roles', {
     id: {
       type: Sequelize.INTEGER,

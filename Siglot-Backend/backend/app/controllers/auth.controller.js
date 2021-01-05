@@ -1,19 +1,19 @@
-import { user as _user, role, Sequelize } from "../models";
-import { secret } from "../config/auth.config";
-const User = _user;
-const Role = role;
+const db = require("../models");
+const config = require("../config/auth.config");
+const User = db.user;
+const Role = db.role;
 
-const Op = Sequelize.Op;
+const Op = db.Sequelize.Op;
 
-import { sign } from 'jsonwebtoken';
-import { hashSync, compareSync } from 'bcryptjs';
+var jwt = require('jsonwebtoken');
+var bcrypt = require('bcryptjs');
 
-export function signup(req, res) {
+exports.signup = (req, res) => {
   //Savar user no banco de dados
   User.create({
     username: req.body.username,
     matricula: req.body.matricula,
-    password: hashSync(req.body.password, 8)
+    password: bcrypt.hashSync(req.body.password, 8)
   })
     .then(user => {
       if (req.body.roles) {
@@ -38,9 +38,9 @@ export function signup(req, res) {
     .catch(err => {
       res.send(500).send({ message: err.message });
     });
-}
+};
 
-export function signin(req, res) {
+exports.signin = (req, res) => {
   User.findOne({
     where: {
       username: req.body.username
@@ -51,7 +51,7 @@ export function signin(req, res) {
         return res.status(404).send({ message: "Usuário nao Encontrado" });
       }
 
-      var passawordIsValid = compareSync(
+      var passawordIsValid = bcrypt.compareSync(
         req.body.password,
         user.password
       );
@@ -63,7 +63,7 @@ export function signin(req, res) {
         });
       }
 
-      var token = sign({ id: user.id }, secret, {
+      var token = jwt.sign({ id: user.id }, config.secret, {
         expiresIn: 3600 //1 hora
       });
 
@@ -84,4 +84,4 @@ export function signin(req, res) {
     .catch(err => {
       res.status(500).send({ message: err.message });
     });
-}
+};

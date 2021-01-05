@@ -1,7 +1,7 @@
-import { verify } from 'jsonwebtoken';
-import { secret } from "../config/auth.config";
-import { user as _user } from '../models';
-const User = _user;
+const jwt = require('jsonwebtoken');
+const config = require("../config/auth.config");
+const db = require('../models');
+const User = db.user;
 
 verifyToken = (req, res, next) => {
   let token = req.headers["x-access-token"];
@@ -12,7 +12,7 @@ verifyToken = (req, res, next) => {
     });
   }
 
-  verify(token, secret, (err, decoded) => {
+  jwt.verify(token, config.secret, (err, decoded) => {
     if (err) {
       return res.status(401).send({
         message: 'Nao autorizado'
@@ -87,4 +87,4 @@ const authJwt = {
   isModeratorOrAdmin: isModeratorOrAdmin
 };
 
-export default authJwt;
+module.exports = authJwt;

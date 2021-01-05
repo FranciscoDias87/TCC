@@ -1,1 +1,3 @@
-export const secret = "siglot-secret-key";
+module.exports = {
+  secret: "siglot-secret-key"
+};
