@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -10,104 +10,170 @@ import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
+import '../Login/style.css';
 import Copyright from '../../components/Copyright';
+import Form from "react-validation/build/form";
+import CheckButton from "react-validation/build/button"
+
+import AuthService from '../../services/auth.service';
 
 
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
-  },
-  form: {
-    width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(2),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-}));
 
+export default class Home extends Component {
+  constructor(props) {
+    super(props);
+    this.handlerLogin = this.handlerLogin.bind(this);
+    this.onChangeMatricula = this.onChangeMatricula.bind(this);
+    this.onChangePassword = this.onChangePassword.bind(this);
 
-export default function Home() {
-  const classes = useStyles();
-  return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Bem vindo ao Siglot
+    this.state = {
+      matricula: "",
+      password: "",
+      loading: false,
+      message: ""
+    };
+  }
+
+  onChangeMatricula(e) {
+    this.setState({
+      matricula: e.target.value
+    });
+  }
+
+  onChangePassword(e) {
+    this.setState({
+      password: e.target.value
+    });
+  }
+
+  handlerLogin(e) {
+    e.preventDefault();
+    this.setState({
+      message: "",
+      loading: true
+    });
+
+    this.form.validateAll();
+
+    if (this.checkBtn.context._errors.length === 0) {
+      AuthService.login(
+        this.state.matricula,
+        this.state.password
+      ).then(() => {
+        this.props.history.push('../Cadastro/Loterica/');
+        window.location.reload();
+      },
+        error => {
+          const resMessage =
+            (error.response &&
+              error.response.data &&
+              error.responde.data.message) ||
+            error.message ||
+            error.toString();
+
+          this.setState({
+            loading: false,
+            message: resMessage
+          });
+        }
+      );
+    } else {
+      this.setState({
+        loading: false
+      });
+    }
+  }
+
+  render() {
+    return (
+      <Container component="main" maxWidth="xs" >
+        <CssBaseline />
+        <div className='paper'>
+          <Avatar className='avatar'>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Bem vindo ao Siglot
         </Typography>
-        <br />
-        <Typography component="h1" variant="h5">
-          Entrar
-        </Typography>
-        <form className={classes.form} noValidate>
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="matricula"
-            label="Matricula"
-            name="matricula"
-            autoComplete="matricula"
-            autoFocus
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Senha"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-          />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Lembrar"
-          />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
+          <br />
+          <Typography component="h1" variant="h5" >
             Entrar
+        </Typography>
+          <Form className='form'
+            onSubmit={this.handlerLogin}
+            ref={c => {
+              this.form = c;
+            }}
+          >
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="matricula"
+              label="Matricula"
+              name="matricula"
+              autoComplete="matricula"
+              autoFocus
+              type='text'
+              value={this.state.matricula}
+              onChange={this.onChangeMatricula}
+            />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Senha"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+              value={this.state.password}
+              onChange={this.onChangePassword}
+            />
+            <FormControlLabel
+              control={<Checkbox value="remember" color="primary" />}
+              label="Lembrar"
+            />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className='submit'
+            >
+              Entrar
           </Button>
-          <Grid container>
-            <Grid item xs>
-              <Link href="#" variant="body2">
-                {'Esqueceu a Senha?'}
-              </Link>
+            <CheckButton
+              style={{ display: "none" }}
+              ref={c => {
+                this.checkBtn = c;
+              }}
+            />
+            <Grid container style={{ margin: '20px 0' }}>
+              <Grid item xs >
+                <Link href="#" variant="body2">
+                  {'Esqueceu a Senha?'}
+                </Link>
+              </Grid>
+              <Grid item >
+                <Link href='../../Cadastro/Loterica' variant="body2">
+                  {"Cadastre-se"}
+                </Link>
+              </Grid>
             </Grid>
-            <Grid item>
-              <Link href='../../Cadastro/Loterica' variant="body2">
-                {"Cadastre-se"}
-              </Link>
-            </Grid>
-          </Grid>
-        </form>
-      </div>
-      <Box mt={6}>
-        <Copyright />
-      </Box>
-    </Container>
-  );
+          </Form>
+        </div>
+        <Box mt={6}>
+          <Copyright />
+        </Box>
+      </Container>
+    );
+
+  }
 }
 
 

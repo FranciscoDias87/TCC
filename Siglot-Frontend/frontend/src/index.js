@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
+import './index.css';
 import App from './App';
 import CadLoterica from './pages/Cadastro/Loterica';
 import CadFuncionario from './pages/Cadastro/Funcionario';
@@ -14,7 +14,6 @@ ReactDOM.render(
       <Route exact path='/' component={App} />
       <Route exact path='/cadastro/loterica' component={CadLoterica} />
       <Route exact path='/cadastro/funcionario' component={CadFuncionario} />
-
     </Switch>
   </BrowserRouter>,
   document.getElementById('root')
