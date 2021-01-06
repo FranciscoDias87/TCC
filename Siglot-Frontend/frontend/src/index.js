@@ -7,6 +7,7 @@ import CadFuncionario from './pages/Cadastro/Funcionario';
 
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
+import Gerente from './pages/Gerente';
 
 ReactDOM.render(
   <BrowserRouter>
@@ -14,6 +15,7 @@ ReactDOM.render(
       <Route exact path='/' component={App} />
       <Route exact path='/cadastro/loterica' component={CadLoterica} />
       <Route exact path='/cadastro/funcionario' component={CadFuncionario} />
+      <Route exact path='/gerente' component={Gerente} />
     </Switch>
   </BrowserRouter>,
   document.getElementById('root')

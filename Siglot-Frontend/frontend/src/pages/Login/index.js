@@ -69,7 +69,7 @@ export default class Home extends Component {
           const resMessage =
             (error.response &&
               error.response.data &&
-              error.responde.data.message) ||
+              error.response.data.message) ||
             error.message ||
             error.toString();
 
@@ -160,8 +160,8 @@ export default class Home extends Component {
                 </Link>
               </Grid>
               <Grid item >
-                <Link href='../../Cadastro/Loterica' variant="body2">
-                  {"Cadastre-se"}
+                <Link href='../../Cadastro/Loterica' variant="body2" >
+                  Cadastre-se
                 </Link>
               </Grid>
             </Grid>

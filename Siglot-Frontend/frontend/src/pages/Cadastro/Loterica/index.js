@@ -16,7 +16,7 @@ import Container from '@material-ui/core/Container';
 
 import './style.css';
 import Copyright from '../../../components/Copyright';
-import authService from '../../../services/auth.service';
+import AuthService from '../../../services/auth.service';
 import Form from "react-validation/build/form";
 import CheckButton from "react-validation/build/button";
 
@@ -39,15 +39,12 @@ export default class Cadastro extends Component {
       message: '',
       successful: false
     }
-
-
   }
 
   onChangeNomeLoterica(e) {
     this.setState({
       nameLoterica: e.target.value
     });
-    console.log('nome:', this.onChangeNomeLoterica);
   }
 
   onChangeCodConvenio(e) {
@@ -79,7 +76,7 @@ export default class Cadastro extends Component {
     this.form.validateAll();
 
     if (this.checkBtn.context._errors.length === 0) {
-      authService.register(
+      AuthService.register(
         this.state.nameLoterica,
         this.state.codConvenio,
         this.state.matriculaGerente,
@@ -194,7 +191,7 @@ export default class Cadastro extends Component {
               style={{ margin: '20px 0', padding: '8px' }}
             >
               Cadastrar
-          </Button>
+            </Button>
             <CheckButton
               style={{ display: 'none' }}
               ref={c => {
@@ -218,6 +215,5 @@ export default class Cadastro extends Component {
       </Container >
     );
   }
-
 }
 

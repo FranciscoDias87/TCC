@@ -11,8 +11,9 @@ var bcrypt = require('bcryptjs');
 exports.signup = (req, res) => {
   //Savar user no banco de dados
   User.create({
-    username: req.body.username,
-    matricula: req.body.matricula,
+    nameLoterica: req.body.nameLoterica,
+    codConvenio: req.body.codConvenio,
+    matriculaGerente: req.body.matriculaGerente,
     password: bcrypt.hashSync(req.body.password, 8)
   })
     .then(user => {
@@ -43,7 +44,7 @@ exports.signup = (req, res) => {
 exports.signin = (req, res) => {
   User.findOne({
     where: {
-      username: req.body.username
+      nameLoterica: req.body.nameLoterica
     }
   })
     .then(user => {
@@ -63,7 +64,7 @@ exports.signin = (req, res) => {
         });
       }
 
-      var token = jwt.sign({ id: user.id }, config.secret, {
+      var token = jwt.signin({ id: user.id }, config.secret, {
         expiresIn: 3600 //1 hora
       });
 
@@ -74,8 +75,8 @@ exports.signin = (req, res) => {
         }
         res.status(200).send({
           id: user.id,
-          username: user.username,
-          matricula: user.matricula,
+          nameLoterica: user.nameLoterica,
+          matriculaGerente: user.matriculaGerente,
           roles: authorities,
           accessToken: token
         });

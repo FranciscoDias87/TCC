@@ -7,7 +7,7 @@ checkDuplicateUsernameOrEmail = (req, res, next) => {
   //Username
   User.findOne({
     where: {
-      username: req.body.username
+      nameLoterica: req.body.nameLoterica
     }
   }).then(user => {
     if (user) {
@@ -21,7 +21,7 @@ checkDuplicateUsernameOrEmail = (req, res, next) => {
     //Matricula
     User.findOne({
       where: {
-        matricula: req.body.matricula
+        matriculaGerente: req.body.matriculaGerente
       }
     }).then(user => {
       if (user) {

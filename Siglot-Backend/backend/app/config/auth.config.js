@@ -1,3 +1,3 @@
 module.exports = {
-  secret: "siglot-secret-key"
+  secret: "lilu1920tcc"
 };
