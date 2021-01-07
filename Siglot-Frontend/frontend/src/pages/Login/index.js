@@ -66,6 +66,7 @@ export default class Home extends Component {
       AuthService.login(this.state.matricula, this.state.password).then(
         () => {
           this.props.history.push('../../Gerente/');
+
           window.location.reload();
         },
         error => {
