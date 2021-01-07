@@ -6,7 +6,7 @@ module.exports = (sequelize, Sequelize) => {
         codConvenio: {
             type: Sequelize.STRING
         },
-        matriculaGerente: {
+        matricula: {
             type: Sequelize.STRING
         },
         password: {

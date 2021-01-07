@@ -13,8 +13,13 @@ exports.signup = (req, res) => {
   User.create({
     nameLoterica: req.body.nameLoterica,
     codConvenio: req.body.codConvenio,
-    matriculaGerente: req.body.matriculaGerente,
+    matricula: req.body.matricula,
+    /*senha criptografada*/
     password: bcrypt.hashSync(req.body.password, 8)
+
+    /*senha sem criptografia*/
+    /*password: req.body.password*/
+
   })
     .then(user => {
       if (req.body.roles) {
@@ -44,13 +49,15 @@ exports.signup = (req, res) => {
 exports.signin = (req, res) => {
   User.findOne({
     where: {
-      nameLoterica: req.body.nameLoterica
+      matricula: req.body.matricula
     }
   })
     .then(user => {
       if (!user) {
         return res.status(404).send({ message: "Usuário nao Encontrado" });
       }
+
+
 
       var passawordIsValid = bcrypt.compareSync(
         req.body.password,
@@ -64,7 +71,7 @@ exports.signin = (req, res) => {
         });
       }
 
-      var token = jwt.signin({ id: user.id }, config.secret, {
+      var token = jwt.sign({ id: user.id }, config.secret, {
         expiresIn: 3600 //1 hora
       });
 
@@ -76,7 +83,7 @@ exports.signin = (req, res) => {
         res.status(200).send({
           id: user.id,
           nameLoterica: user.nameLoterica,
-          matriculaGerente: user.matriculaGerente,
+          matricula: user.matricula,
           roles: authorities,
           accessToken: token
         });

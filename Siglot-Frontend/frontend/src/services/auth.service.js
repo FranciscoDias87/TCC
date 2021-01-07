@@ -1,32 +1,35 @@
 //authentication service
 import axios from 'axios';
 
-const API_URL = 'http://localhost:8081/api/auth/';
+const API_URL = 'http://localhost:8080/api/auth/';
 
 class AuthService {
-  async login(matriculaGerente, password) {
-    const response = await axios
+  login(matricula, password) {
+    return axios
       .post(API_URL + 'signin', {
-        matriculaGerente,
+        matricula,
         password
+      })
+      .then(response => {
+        if (response.data.accessToken) {
+          localStorage.setItem('user', JSON.stringify(response.data));
+        }
+        return response.data;
       });
-    if (response.data.accessToken) {
-      localStorage.setItem('user', JSON.stringify(response.data));
-    }
-    return response.data;
   }
 
   logout() {
     localStorage.removeItem('user');
   }
 
-  register(nameLoterica, codConvenio, matriculaGerente, password,) {
-    return axios.post(API_URL + 'signup', {
-      nameLoterica,
-      codConvenio,
-      matriculaGerente,
-      password,
-    });
+  register(nameLoterica, codConvenio, matricula, password,) {
+    return axios
+      .post(API_URL + 'signup', {
+        nameLoterica,
+        codConvenio,
+        matricula,
+        password
+      });
   }
 
   getCurrentUser() {

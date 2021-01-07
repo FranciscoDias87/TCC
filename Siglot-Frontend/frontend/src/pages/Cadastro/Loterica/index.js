@@ -27,14 +27,14 @@ export default class Cadastro extends Component {
     super(props);
     this.onChangeNomeLoterica = this.onChangeNomeLoterica.bind(this);
     this.onChangeCodConvenio = this.onChangeCodConvenio.bind(this);
-    this.onChangeMatrGerente = this.onChangeMatrGerente.bind(this);
+    this.onChangeMatricula = this.onChangeMatricula.bind(this);
     this.onChangePassword = this.onChangePassword.bind(this);
     this.handRegister = this.handRegister.bind(this);
 
     this.state = {
       nameLoterica: '',
       codConvenio: '',
-      matriculaGerente: '',
+      matricula: '',
       password: '',
       message: '',
       successful: false
@@ -53,11 +53,12 @@ export default class Cadastro extends Component {
     });
   }
 
-  onChangeMatrGerente(e) {
+  onChangeMatricula(e) {
     this.setState({
-      matriculaGerente: e.target.value
+      matricula: e.target.value
     });
   }
+
 
   onChangePassword(e) {
     this.setState({
@@ -79,7 +80,7 @@ export default class Cadastro extends Component {
       AuthService.register(
         this.state.nameLoterica,
         this.state.codConvenio,
-        this.state.matriculaGerente,
+        this.state.matricula,
         this.state.password
       ).then(
         response => {
@@ -154,16 +155,16 @@ export default class Cadastro extends Component {
               </Grid>
               <Grid item xs={12} sm={12}>
                 <TextField
-                  autoComplete="matgerente"
-                  name="matriculaGerente"
+                  autoComplete="matricula"
+                  name="matricula"
                   variant="outlined"
                   required
                   fullWidth
-                  id="matriculaGerente"
-                  label="Matricula Gerente"
+                  id="matricula"
+                  label="Matricula"
                   autoFocus
-                  value={this.state.matriculaGerente}
-                  onChange={this.onChangeMatrGerente}
+                  value={this.state.matricula}
+                  onChange={this.onChangeMatricula}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -189,6 +190,7 @@ export default class Cadastro extends Component {
               color="primary"
               className='submit'
               style={{ margin: '20px 0', padding: '8px' }}
+
             >
               Cadastrar
             </Button>

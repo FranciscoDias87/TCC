@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -21,7 +22,10 @@ import AuthService from '../../services/auth.service';
 
 
 
+
 export default class Home extends Component {
+
+
   constructor(props) {
     super(props);
     this.handlerLogin = this.handlerLogin.bind(this);
@@ -50,6 +54,7 @@ export default class Home extends Component {
 
   handlerLogin(e) {
     e.preventDefault();
+
     this.setState({
       message: "",
       loading: true
@@ -58,13 +63,11 @@ export default class Home extends Component {
     this.form.validateAll();
 
     if (this.checkBtn.context._errors.length === 0) {
-      AuthService.login(
-        this.state.matricula,
-        this.state.password
-      ).then(() => {
-        this.props.history.push('../Cadastro/Loterica/');
-        window.location.reload();
-      },
+      AuthService.login(this.state.matricula, this.state.password).then(
+        () => {
+          this.props.history.push('../../Gerente/');
+          window.location.reload();
+        },
         error => {
           const resMessage =
             (error.response &&
