@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import FormControl from "@material-ui/core/FormControl"
 import TextField from '@material-ui/core/TextField';
-
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
@@ -19,37 +19,40 @@ import AuthService from '../../../services/auth.service';
 import Form from "react-validation/build/form";
 import CheckButton from "react-validation/build/button";
 import { withRouter } from 'react-router-dom';
-
+import { InputLabel, Select } from '@material-ui/core';
 
 
 class Cadastro extends Component {
   constructor(props) {
     super(props);
-    this.onChangeNomeLoterica = this.onChangeNomeLoterica.bind(this);
-    this.onChangeCodConvenio = this.onChangeCodConvenio.bind(this);
+    this.onChangeNomeFuncionario = this.onChangeNomeFuncionario.bind(this);
+    this.onChangeCPF = this.onChangeCPF.bind(this);
     this.onChangeMatricula = this.onChangeMatricula.bind(this);
+    this.onChangeFuncao = this.onChangeFuncao.bind.bind(this);
     this.onChangePassword = this.onChangePassword.bind(this);
     this.handRegister = this.handRegister.bind(this);
 
     this.state = {
-      nameLoterica: '',
-      codConvenio: '',
+      nameFuncionario: '',
+      CPF: '',
       matricula: '',
+      funcao: '',
       password: '',
       message: '',
       successful: false
     }
   }
 
-  onChangeNomeLoterica(e) {
+
+  onChangeNomeFuncionario(e) {
     this.setState({
-      nameLoterica: e.target.value
+      nameFuncionario: e.target.value
     });
   }
 
-  onChangeCodConvenio(e) {
+  onChangeCPF(e) {
     this.setState({
-      codConvenio: e.target.value
+      CPF: e.target.value
     });
   }
 
@@ -57,6 +60,12 @@ class Cadastro extends Component {
     this.setState({
       matricula: e.target.value
     });
+  }
+
+  onChangeFuncao(e) {
+    this.setState({
+      funcao: e.target.value
+    })
   }
 
 
@@ -68,8 +77,10 @@ class Cadastro extends Component {
 
   handRegister(e) {
     e.preventDefault();
-
+    const name = e.target.value;
     this.setState({
+
+      [name]: e.target.value,
       message: '',
       successful: false
     });
@@ -78,13 +89,14 @@ class Cadastro extends Component {
 
     if (this.checkBtn.context._errors.length === 0) {
       AuthService.register(
-        this.state.nameLoterica,
-        this.state.codConvenio,
+        this.state.nameFuncionario,
+        this.state.CPF,
         this.state.matricula,
+        this.state.funcao,
         this.state.password
       ).then(
-        response => {
-          this.props.history.push('../../Gerente');
+        response => {//Concertar esta parte
+          this.props.history.push('../../Caixa');
           window.location.reload();
 
           this.setState({
@@ -118,7 +130,7 @@ class Cadastro extends Component {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Cadastro da Loterica
+            Cadastro de Funcionario
         </Typography>
           <Form className='form'
             onSubmit={this.handRegister}
@@ -129,31 +141,31 @@ class Cadastro extends Component {
             <Grid container spacing={2}>
               <Grid item xs={12} sm={12}>
                 <TextField
-                  autoComplete="lotName"
-                  name="nameLoterica"
+                  autoComplete="funcName"
+                  name="nameFuncioario"
                   variant="outlined"
                   required
                   fullWidth
-                  id="nameLoterica"
-                  label="Nome da Loterica"
+                  id="nameFuncioario"
+                  label="Nome da Funcioario"
                   autoFocus
-                  onChange={this.onChangeNomeLoterica}
-                  value={this.state.nameLoterica}
+                  onChange={this.onChangeNomeFuncionario}
+                  value={this.state.nameFuncionario}
                 />
               </Grid>
 
               <Grid item xs={12} sm={12}>
                 <TextField
-                  autoComplete="codconvenio"
-                  name="convenio"
+                  autoComplete="cpf"
+                  name="cpf"
                   variant="outlined"
                   required
                   fullWidth
-                  id="codConvenio"
-                  label="Codigo Convenio"
+                  id="cpf"
+                  label="CPF"
                   autoFocus
-                  value={this.state.codConvenio}
-                  onChange={this.onChangeCodConvenio}
+                  value={this.state.CPF}
+                  onChange={this.onChangeCPF}
                 />
               </Grid>
               <Grid item xs={12} sm={12}>
@@ -170,6 +182,19 @@ class Cadastro extends Component {
                   onChange={this.onChangeMatricula}
                 />
               </Grid>
+
+              <Grid item xs={12} sm={12}>
+                <FormControl variant='filled' required fullWidth>
+                  <InputLabel htmlFor="grouped-native-select">Funcao</InputLabel>
+                  <Select native defaultValue="" id="grouped-native-select">
+                    <optgroup label="Funcao">
+                      <option value={1}>Gerente</option>
+                      <option value={2}>Caixa</option>
+                    </optgroup>
+                  </Select>
+                </FormControl>
+              </Grid>
+
               <Grid item xs={12}>
                 <TextField
                   variant="outlined"
