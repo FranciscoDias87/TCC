@@ -31,7 +31,7 @@ exports.signup = (req, res) => {
           }
         }).then(roles => {
           user.setRoles(roles).then(() => {
-            res.send({ message: 'Usuario foi registrado com sucesso' });
+            res.send({ message: 'Usuario registrado com sucesso' });
           });
         });
       } else {
@@ -54,11 +54,8 @@ exports.signin = (req, res) => {
   })
     .then(user => {
       if (!user) {
-        return res.status(404).send({ message: "Usuário nao Encontrado" });
+        return res.status(404).send({ message: "Usuário não Encontrado" });
       }
-
-
-
       var passawordIsValid = bcrypt.compareSync(
         req.body.password,
         user.password

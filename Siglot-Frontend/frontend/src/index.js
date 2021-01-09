@@ -15,7 +15,7 @@ ReactDOM.render(
       <Route exact path='/' component={App} />
       <Route exact path='/cadastro/loterica' component={CadLoterica} />
       <Route exact path='/cadastro/funcionario' component={CadFuncionario} />
-      <Route exact path='/gerente' component={Gerente} />
+      <Route exact path='/gerente/' component={Gerente} />
     </Switch>
   </BrowserRouter>,
   document.getElementById('root')

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -17,15 +18,13 @@ import '../Login/style.css';
 import Copyright from '../../components/Copyright';
 import Form from "react-validation/build/form";
 import CheckButton from "react-validation/build/button"
+import { Alert } from '@material-ui/lab';
+import { withRouter } from 'react-router-dom';
 
 import AuthService from '../../services/auth.service';
 
 
-
-
-export default class Home extends Component {
-
-
+class Home extends Component {
   constructor(props) {
     super(props);
     this.handlerLogin = this.handlerLogin.bind(this);
@@ -52,6 +51,7 @@ export default class Home extends Component {
     });
   }
 
+
   handlerLogin(e) {
     e.preventDefault();
 
@@ -65,9 +65,13 @@ export default class Home extends Component {
     if (this.checkBtn.context._errors.length === 0) {
       AuthService.login(this.state.matricula, this.state.password).then(
         () => {
-          this.props.history.push('../../Gerente/');
-
-          window.location.reload();
+          if (AuthService.getCurrentUser === 'Gerente') {
+            this.props.history.push('../../Gerente');
+            window.location.reload();
+          } else {
+            this.props.history.push('../../Caixa');
+            window.location.reload();
+          }
         },
         error => {
           const resMessage =
@@ -85,7 +89,7 @@ export default class Home extends Component {
       );
     } else {
       this.setState({
-        loading: false
+        loading: false,
       });
     }
   }
@@ -125,6 +129,7 @@ export default class Home extends Component {
               value={this.state.matricula}
               onChange={this.onChangeMatricula}
             />
+
             <TextField
               variant="outlined"
               margin="normal"
@@ -138,6 +143,16 @@ export default class Home extends Component {
               value={this.state.password}
               onChange={this.onChangePassword}
             />
+
+            <Grid item xs={12} >
+              {this.state.message && (
+                <Alert variant='filled'  >
+                  <div>
+                    {this.state.message}
+                  </div>
+                </Alert>
+              )}
+            </Grid>
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Lembrar"
@@ -149,9 +164,13 @@ export default class Home extends Component {
               color="primary"
               className='submit'
             >
+              {this.state.loading && (
+                <span  ></span>
+              )}
               Entrar
           </Button>
-            <CheckButton
+
+            < CheckButton
               style={{ display: "none" }}
               ref={c => {
                 this.checkBtn = c;
@@ -179,5 +198,7 @@ export default class Home extends Component {
 
   }
 }
+
+export default withRouter(Home);
 
 

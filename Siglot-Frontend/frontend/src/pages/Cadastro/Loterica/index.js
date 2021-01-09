@@ -9,8 +9,7 @@ import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
-
-
+import { Alert } from '@material-ui/lab';
 
 import Container from '@material-ui/core/Container';
 
@@ -19,10 +18,11 @@ import Copyright from '../../../components/Copyright';
 import AuthService from '../../../services/auth.service';
 import Form from "react-validation/build/form";
 import CheckButton from "react-validation/build/button";
+import { withRouter } from 'react-router-dom';
 
 
 
-export default class Cadastro extends Component {
+class Cadastro extends Component {
   constructor(props) {
     super(props);
     this.onChangeNomeLoterica = this.onChangeNomeLoterica.bind(this);
@@ -84,6 +84,9 @@ export default class Cadastro extends Component {
         this.state.password
       ).then(
         response => {
+          this.props.history.push('../../Gerente');
+          window.location.reload();
+
           this.setState({
             message: response.data.message,
             successful: true
@@ -181,8 +184,17 @@ export default class Cadastro extends Component {
                   onChange={this.onChangePassword}
                 />
               </Grid>
-
+              <Grid item xs={12} >
+                {this.state.message && (
+                  <Alert variant='filled'  >
+                    <div>
+                      {this.state.message}
+                    </div>
+                  </Alert>
+                )}
+              </Grid>
             </Grid>
+
             <Button
               type="submit"
               fullWidth
@@ -190,7 +202,6 @@ export default class Cadastro extends Component {
               color="primary"
               className='submit'
               style={{ margin: '20px 0', padding: '8px' }}
-
             >
               Cadastrar
             </Button>
@@ -200,12 +211,11 @@ export default class Cadastro extends Component {
                 this.checkBtn = c;
               }}
             />
-
             <Grid container justify="flex-end">
               <Grid item>
                 {'Ja possui Conta?'}
                 <Link href="/" variant="body2">
-                  {' Logar'}
+                  {' Entrar'}
                 </Link>
               </Grid>
             </Grid>
@@ -219,3 +229,4 @@ export default class Cadastro extends Component {
   }
 }
 
+export default withRouter(Cadastro);
