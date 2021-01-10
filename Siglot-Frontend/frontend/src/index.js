@@ -4,10 +4,12 @@ import './index.css';
 import App from './App';
 import CadLoterica from './pages/Cadastro/Loterica';
 import CadFuncionario from './pages/Cadastro/Funcionario';
+import Gerente from './pages/Gerente';
+import Caixa from './pages/Caixa';
 
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
-import Gerente from './pages/Gerente';
+
 
 ReactDOM.render(
   <BrowserRouter>
@@ -16,6 +18,7 @@ ReactDOM.render(
       <Route exact path='/cadastro/loterica' component={CadLoterica} />
       <Route exact path='/cadastro/funcionario' component={CadFuncionario} />
       <Route exact path='/gerente/' component={Gerente} />
+      <Route exact path='/caixa/' component={Caixa} />
     </Switch>
   </BrowserRouter>,
   document.getElementById('root')

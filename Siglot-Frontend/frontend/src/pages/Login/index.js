@@ -105,7 +105,6 @@ class Home extends Component {
           <Typography component="h1" variant="h5">
             Bem vindo ao Siglot
         </Typography>
-          <br />
           <Typography component="h1" variant="h5" >
             Entrar
         </Typography>
