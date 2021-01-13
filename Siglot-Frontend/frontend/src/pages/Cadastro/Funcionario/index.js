@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import FormControl from "@material-ui/core/FormControl"
+
 import TextField from '@material-ui/core/TextField';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
@@ -19,7 +19,7 @@ import AuthService from '../../../services/auth.service';
 import Form from "react-validation/build/form";
 import CheckButton from "react-validation/build/button";
 import { withRouter } from 'react-router-dom';
-import { InputLabel, Select } from '@material-ui/core';
+
 
 
 class Cadastro extends Component {
@@ -28,13 +28,13 @@ class Cadastro extends Component {
     this.onChangeNomeFuncionario = this.onChangeNomeFuncionario.bind(this);
     this.onChangeCPF = this.onChangeCPF.bind(this);
     this.onChangeMatricula = this.onChangeMatricula.bind(this);
-    this.onChangeFuncao = this.onChangeFuncao.bind.bind(this);
+    this.onChangeFuncao = this.onChangeFuncao.bind(this);
     this.onChangePassword = this.onChangePassword.bind(this);
     this.handRegister = this.handRegister.bind(this);
 
     this.state = {
       nameFuncionario: '',
-      CPF: '',
+      cpf: '',
       matricula: '',
       funcao: '',
       password: '',
@@ -52,7 +52,7 @@ class Cadastro extends Component {
 
   onChangeCPF(e) {
     this.setState({
-      CPF: e.target.value
+      cpf: e.target.value
     });
   }
 
@@ -88,9 +88,9 @@ class Cadastro extends Component {
     this.form.validateAll();
 
     if (this.checkBtn.context._errors.length === 0) {
-      AuthService.register(
+      AuthService.registerFunc(
         this.state.nameFuncionario,
-        this.state.CPF,
+        this.state.cpf,
         this.state.matricula,
         this.state.funcao,
         this.state.password
@@ -164,7 +164,7 @@ class Cadastro extends Component {
                   id="cpf"
                   label="CPF"
                   autoFocus
-                  value={this.state.CPF}
+                  value={this.state.cpf}
                   onChange={this.onChangeCPF}
                 />
               </Grid>
@@ -184,15 +184,18 @@ class Cadastro extends Component {
               </Grid>
 
               <Grid item xs={12} sm={12}>
-                <FormControl variant='filled' required fullWidth>
-                  <InputLabel htmlFor="grouped-native-select">Funcao</InputLabel>
-                  <Select native defaultValue="" id="grouped-native-select">
-                    <optgroup label="Funcao">
-                      <option value={1}>Gerente</option>
-                      <option value={2}>Caixa</option>
-                    </optgroup>
-                  </Select>
-                </FormControl>
+                <TextField
+                  autoComplete="funca"
+                  name="funcao"
+                  variant="outlined"
+                  required
+                  fullWidth
+                  id="funcao"
+                  label="Funcao"
+                  autoFocus
+                  value={this.state.funcao}
+                  onChange={this.onChangeFuncao}
+                />
               </Grid>
 
               <Grid item xs={12}>

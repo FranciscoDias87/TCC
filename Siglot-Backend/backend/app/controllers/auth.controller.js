@@ -1,7 +1,8 @@
 const db = require("../models");
 const config = require("../config/auth.config");
 const User = db.user;
-const Role = db.role;
+const Funcao = db.funcoes;
+const Loterica = db.loterica;
 
 const Op = db.Sequelize.Op;
 
@@ -11,9 +12,10 @@ var bcrypt = require('bcryptjs');
 exports.signup = (req, res) => {
   //Savar user no banco de dados
   User.create({
-    nameLoterica: req.body.nameLoterica,
-    codConvenio: req.body.codConvenio,
+    nameFuncionario: req.body.nameFuncionario,
+    cpf: req.body.cpf,
     matricula: req.body.matricula,
+    funcao: req.body.funcao,
     /*senha criptografada*/
     password: bcrypt.hashSync(req.body.password, 8)
 
@@ -22,21 +24,21 @@ exports.signup = (req, res) => {
 
   })
     .then(user => {
-      if (req.body.roles) {
-        Role.findAll({
+      if (req.body.funcoes) {
+        Funcao.findAll({
           where: {
             name: {
-              [Op.or]: req.body.roles
+              [Op.or]: req.body.funcoes
             }
           }
-        }).then(roles => {
-          user.setRoles(roles).then(() => {
+        }).then(funcoes => {
+          user.setFuncao(funcoes).then(() => {
             res.send({ message: 'Usuario registrado com sucesso' });
           });
         });
       } else {
         //funções usuário = 1
-        user.setRoles([1]).then(() => {
+        user.setFuncoes([1]).then(() => {
           res.send({ message: 'Usuario foi registrado com sucesso' });
         });
       }
@@ -44,7 +46,27 @@ exports.signup = (req, res) => {
     .catch(err => {
       res.send(500).send({ message: err.message });
     });
+
+
 };
+
+
+exports.signupLot = (req, res) => {
+  //Savar loterica no banco de dados
+  Loterica.create({
+    nameLoterica: req.body.nameLoterica,
+    codConvenio: req.body.codConvenio,
+    codagencia: req.body.codagencia,
+    nameagencia: req.body.nameagencia
+  })
+    .then(() => {
+      res.send({ message: "Loterica Cadastrada com Sucesso" });
+    })
+    .catch(err => {
+      res.send(500).send({ message: err.message });
+    });
+}
+
 
 exports.signin = (req, res) => {
   User.findOne({
@@ -73,16 +95,17 @@ exports.signin = (req, res) => {
       });
 
       var authorities = [];
-      user.getRoles().then(roles => {
-        for (let i = 0; i < roles.length; i++) {
-          authorities.push("ROLE_" + roles[i].name.toUpperCase());
+      user.getFuncoes().then(funcoes => {
+        for (let i = 0; i < funcoes.length; i++) {
+          authorities.push("FUNCAO_" + funcoes[i].name.toUpperCase());
         }
         res.status(200).send({
+          accessToken: token,
+          funcoes: authorities,
           id: user.id,
-          nameLoterica: user.nameLoterica,
           matricula: user.matricula,
-          roles: authorities,
-          accessToken: token
+          nameFuncionario: user.nameFuncionario,
+          password: user.password
         });
       });
     })

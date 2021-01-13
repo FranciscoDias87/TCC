@@ -1,13 +1,14 @@
 const db = require("../models");
 
-const ROLES = db.ROLES;
+const FUNCOES = db.funcoes;
 const User = db.user;
 
-checkDuplicateUsernameOrEmail = (req, res, next) => {
+
+checkDuplicateUsernameOrMatricula = (req, res, next) => {
   //Username
   User.findOne({
     where: {
-      nameLoterica: req.body.nameLoterica
+      nameFuncionario: req.body.nameFuncionario
     }
   }).then(user => {
     if (user) {
@@ -16,7 +17,6 @@ checkDuplicateUsernameOrEmail = (req, res, next) => {
       });
       return;
     }
-
 
     //Matricula
     User.findOne({
@@ -36,12 +36,12 @@ checkDuplicateUsernameOrEmail = (req, res, next) => {
 };
 
 
-checkRolesExisted = (req, res, next) => {
-  if (req.body.roles) {
-    for (let i = 0; i < req.body.roles.lenght; i++) {
-      if (!ROLES.includes(req.body.roles[i])) {
+checkFuncoesExisted = (req, res, next) => {
+  if (req.body.funcoes) {
+    for (let i = 0; i < req.body.funcoes.length; i++) {
+      if (!FUNCOES.includes(req.body.funcoes[i])) {
         res.status(400).send({
-          message: "Falha! Função não existe = " + req.body.role[i]
+          message: "Falha! Função não existe = " + req.body.funcoes[i]
         });
         return;
       }
@@ -51,9 +51,10 @@ checkRolesExisted = (req, res, next) => {
 };
 
 const verifySignUp = {
-  checkDuplicateUsernameOrEmail: checkDuplicateUsernameOrEmail,
-  checkRolesExisted: checkRolesExisted
+  checkDuplicateUsernameOrMatricula: checkDuplicateUsernameOrMatricula,
+  checkFuncoesExisted: checkFuncoesExisted
 }
 
 module.exports = verifySignUp;
+
 

@@ -25,9 +25,9 @@ verifyToken = (req, res, next) => {
 
 isAdmin = (res, req, next) => {
   User.findByPk(req.userId).then(user => {
-    user.getRoles().then(roles => {
-      for (let i = 0; i < roles.length; i++) {
-        if (roles[i].name === 'admin') {
+    user.getFuncao().then(funcoes => {
+      for (let i = 0; i < funcoes.length; i++) {
+        if (funcoes[i].name === 'admin') {
           next();
           return;
         }
@@ -43,9 +43,9 @@ isAdmin = (res, req, next) => {
 
 isModerator = (res, req, next) => {
   User.findByPk(req.userId).then(user => {
-    user.getRoles().then(roles => {
-      for (let i = 0; i < roles.length; i++) {
-        if (roles[i].name === 'moderador') {
+    user.getFuncao().then(funcoes => {
+      for (let i = 0; i < funcoes.length; i++) {
+        if (funcoes[i].name === 'moderador') {
           next();
           return;
         }
@@ -59,15 +59,51 @@ isModerator = (res, req, next) => {
 };
 
 
-isModeratorOrAdmin = (res, req, next) => {
+isGerente = (res, req, next) => {
   User.findByPk(req.userId).then(user => {
-    user.getRoles().then(roles => {
-      for (let i = 0; i < roles.length; i++) {
-        if (roles[i].name === 'moderator') {
+    user.getFuncao().then(funcoes => {
+      for (let i = 0; i < funcoes.length; i++) {
+        if (funcoes[i].name === 'Gerente') {
           next();
           return;
         }
-        if (roles[i].name === 'admin') {
+      }
+      res.status(403).send({
+        message: 'Requer Nivel de Gerente'
+      });
+      return;
+    });
+  });
+};
+
+
+isCaixa = (res, req, next) => {
+  User.findByPk(req.userId).then(user => {
+    user.getFuncao().then(funcoes => {
+      for (let i = 0; i < funcoes.length; i++) {
+        if (funcoes[i].name === 'Caixa') {
+          next();
+          return;
+        }
+      }
+      res.status(403).send({
+        message: 'Requer Nivel de Caixa'
+      });
+      return;
+    });
+  });
+};
+
+
+isModeratorOrAdmin = (res, req, next) => {
+  User.findByPk(req.userId).then(user => {
+    user.getFuncao().then(funcoes => {
+      for (let i = 0; i < funcoes.length; i++) {
+        if (funcoes[i].name === 'moderator') {
+          next();
+          return;
+        }
+        if (funcoes[i].name === 'admin') {
           next();
           return;
         }
@@ -80,10 +116,14 @@ isModeratorOrAdmin = (res, req, next) => {
   });
 };
 
+
+
 const authJwt = {
   verifyToken: verifyToken,
   isAdmin: isAdmin,
   isModerator: isModerator,
+  isGerente: isGerente,
+  isCaixa: isCaixa,
   isModeratorOrAdmin: isModeratorOrAdmin
 };
 

@@ -17,21 +17,28 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
+db.loterica = require("../models/loterica.model")(sequelize, Sequelize);
 db.user = require("../models/user.model")(sequelize, Sequelize);
-db.role = require("../models/role.model")(sequelize, Sequelize);
+db.funcao = require("../models/funcao.model")(sequelize, Sequelize);
 
-db.role.belongsToMany(db.user, {
-  through: "user_roles",
-  foreignKey: "roleId",
-  otherKey: 'userId'
+db.loterica.belongsToMany(db.user, {
+  through: "user_loterica",
+  foreignKey: "lotericaId",
+  otherKey: "userId"
+})
+
+db.funcao.belongsToMany(db.user, {
+  through: "user_funcoes",
+  foreignKey: "funcaoId",
+  otherKey: "userId"
 });
 
-db.user.belongsToMany(db.role, {
-  through: "user_roles",
+db.user.belongsToMany(db.funcao, {
+  through: "user_funcoes",
   foreignKey: "userId",
-  otherKey: "roleId"
+  otherKey: "funcaoId"
 });
 
-db.ROLES = ["user", "admin", "moderator"];
+db.ROLES = ["user", "admin", "moderator", "Gerente", "Caixa"];
 
 module.exports = db;

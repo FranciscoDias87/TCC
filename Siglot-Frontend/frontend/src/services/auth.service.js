@@ -22,15 +22,27 @@ class AuthService {
     localStorage.removeItem('user');
   }
 
-  register(nameLoterica, codConvenio, matricula, password,) {
+  registerLot(nameLoterica, codConvenio, codagencia, nameagencia,) {
     return axios
-      .post(API_URL + 'signup', {
+      .post(API_URL + 'signupLot', {
         nameLoterica,
         codConvenio,
+        codagencia,
+        nameagencia
+      });
+  }
+
+  registerFunc(nameFuncionario, cpf, matricula, funcao, password) {
+    return axios
+      .post(API_URL + 'signup', {
+        nameFuncionario,
+        cpf,
         matricula,
+        funcao,
         password
       });
   }
+
 
   getCurrentUser() {
     return JSON.parse(localStorage.getItem('user'));

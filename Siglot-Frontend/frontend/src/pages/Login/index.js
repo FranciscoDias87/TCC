@@ -65,11 +65,11 @@ class Home extends Component {
     if (this.checkBtn.context._errors.length === 0) {
       AuthService.login(this.state.matricula, this.state.password).then(
         () => {
-          if (AuthService.getCurrentUser === 'Gerente') {
-            this.props.history.push('../../Gerente');
+          if (AuthService.getCurrentUser === 'Caixa') {
+            this.props.history.push('../../Caixa');
             window.location.reload();
           } else {
-            this.props.history.push('../../Caixa');
+            this.props.history.push('../../Gerente');
             window.location.reload();
           }
         },

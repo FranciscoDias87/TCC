@@ -27,15 +27,15 @@ class Cadastro extends Component {
     super(props);
     this.onChangeNomeLoterica = this.onChangeNomeLoterica.bind(this);
     this.onChangeCodConvenio = this.onChangeCodConvenio.bind(this);
-    this.onChangeMatricula = this.onChangeMatricula.bind(this);
-    this.onChangePassword = this.onChangePassword.bind(this);
+    this.onChangeCodAgencia = this.onChangeCodAgencia.bind(this);
+    this.onChangeNomeAgencia = this.onChangeNomeAgencia.bind(this);
     this.handRegister = this.handRegister.bind(this);
 
     this.state = {
       nameLoterica: '',
       codConvenio: '',
-      matricula: '',
-      password: '',
+      codagencia: '',
+      nameagencia: '',
       message: '',
       successful: false
     }
@@ -53,16 +53,16 @@ class Cadastro extends Component {
     });
   }
 
-  onChangeMatricula(e) {
+  onChangeCodAgencia(e) {
     this.setState({
-      matricula: e.target.value
+      codagencia: e.target.value
     });
   }
 
 
-  onChangePassword(e) {
+  onChangeNomeAgencia(e) {
     this.setState({
-      password: e.target.value
+      nameagencia: e.target.value
     })
   }
 
@@ -77,14 +77,14 @@ class Cadastro extends Component {
     this.form.validateAll();
 
     if (this.checkBtn.context._errors.length === 0) {
-      AuthService.register(
+      AuthService.registerLot(
         this.state.nameLoterica,
         this.state.codConvenio,
-        this.state.matricula,
-        this.state.password
+        this.state.codagencia,
+        this.state.nameagencia
       ).then(
         response => {
-          this.props.history.push('../../Gerente');
+          this.props.history.push('../../Cadastro/Funcionario');
           window.location.reload();
 
           this.setState({
@@ -158,32 +158,34 @@ class Cadastro extends Component {
               </Grid>
               <Grid item xs={12} sm={12}>
                 <TextField
-                  autoComplete="matricula"
-                  name="matricula"
+                  autoComplete="codagencia"
+                  name="codagencia"
                   variant="outlined"
                   required
                   fullWidth
-                  id="matricula"
-                  label="Matricula"
+                  id="codagencia"
+                  label="Codigo Agencia"
                   autoFocus
-                  value={this.state.matricula}
-                  onChange={this.onChangeMatricula}
+                  value={this.state.codagencia}
+                  onChange={this.onChangeCodAgencia}
                 />
               </Grid>
-              <Grid item xs={12}>
+              <Grid item xs={12} sm={12}>
                 <TextField
+                  autoComplete="nameagencia"
+                  name="nameagencia"
                   variant="outlined"
                   required
                   fullWidth
-                  name="password"
-                  label="Senha"
-                  type="password"
-                  id="password"
-                  autoComplete="current-password"
-                  value={this.state.password}
-                  onChange={this.onChangePassword}
+                  id="nameagencia"
+                  label="Nome Agência"
+                  autoFocus
+                  value={this.state.nameagencia}
+                  onChange={this.onChangeNomeAgencia}
                 />
               </Grid>
+
+
               <Grid item xs={12} >
                 {this.state.message && (
                   <Alert variant='filled'  >

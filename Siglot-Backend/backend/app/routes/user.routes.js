@@ -29,4 +29,16 @@ module.exports = function (app) {
     [authJwt.verifyToken, authJwt.isAdmin],
     controller.adminBoard
   );
+
+  app.get(
+    "api/test/gerente",
+    [authJwt.verifyToken, authJwt.isGerente],
+    controller.gerenteBoard
+  );
+
+  app.get(
+    "api/test/caixa",
+    [authJwt.verifyToken, authJwt.isCaixa],
+    controller.caixaBoard
+  );
 }

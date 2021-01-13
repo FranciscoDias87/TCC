@@ -5,28 +5,8 @@ const cors = require('cors');
 const app = express();
 
 const db = require("./app/models");
-
-
 db.sequelize.sync();
 
-/*  
-function initial() {
-  Role.create({
-    id: 1,
-    name: "user"
-  });
-
-  Role.create({
-    id: 2,
-    name: "moderator"
-  });
-
-  Role.create({
-    id: 3,
-    name: "admin"
-  })
-}
- */
 
 var corOptions = {
   origin: "http://localhost:8081"
