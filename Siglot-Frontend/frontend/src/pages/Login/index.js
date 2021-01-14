@@ -96,10 +96,10 @@ class Home extends Component {
 
   render() {
     return (
-      <Container component="main" maxWidth="xs" >
+      <Container component="main" maxWidth="xs"  >
         <CssBaseline />
         <div className='paper'>
-          <Avatar className='avatar'>
+          <Avatar className='avatar' >
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
@@ -130,6 +130,7 @@ class Home extends Component {
             />
 
             <TextField
+
               variant="outlined"
               margin="normal"
               required
