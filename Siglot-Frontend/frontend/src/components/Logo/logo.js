@@ -1,15 +1,7 @@
-*{
-margin: 0;
-}
 
-.paper{
-    margin-top: 40px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+import styled from 'styled-components';
 
-.paper >.MuiAvatar-root{
+const Logo = styled.img`
     width: 100px;
     height: 92px;
     display: flex;
@@ -23,18 +15,7 @@ margin: 0;
     user-select: none;
     border-radius: 0%;
     justify-content: center;
-}
+    src:'../../assets/img/siglot2.jpg';
+`;
 
-.form{
-    width: 100%; /* Fix IE 11 issue.*/    
-    padding: 8px
-}
-.submit{
-    margin: 24px 0;
-    background-color: #3f51b5;
-}
-
-.abaicoEntrar{
-    margin: 10px;
-}
-
+export default Logo;

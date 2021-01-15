@@ -8,11 +8,21 @@
       flex-direction: column;
       align-items: center;
   }
-  
-  .avatar{
-      margin: 10px;
-      background-color: #F50057;
-  }
+  .paper >.MuiAvatar-root{
+    margin-top: -20px;
+    width: 100px;
+    height: 92px;    
+    display: flex;
+    overflow: hidden;
+    position: relative;
+    font-size: 1.25rem;
+    align-items: center;
+    flex-shrink: 0;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    line-height: 1;
+    user-select: none;    
+    justify-content: center;
+}
   
   .form{
     width: 100%; /* Fix IE 11 issue.*/

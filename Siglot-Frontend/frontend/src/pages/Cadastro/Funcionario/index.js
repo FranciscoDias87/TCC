@@ -7,7 +7,7 @@ import TextField from '@material-ui/core/TextField';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+
 import Typography from '@material-ui/core/Typography';
 import { Alert } from '@material-ui/lab';
 
@@ -20,6 +20,7 @@ import Form from "react-validation/build/form";
 import CheckButton from "react-validation/build/button";
 import { withRouter } from 'react-router-dom';
 
+import Logo from "../../../assets/img/siglot2.jpg"
 
 
 class Cadastro extends Component {
@@ -126,8 +127,8 @@ class Cadastro extends Component {
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <div className='paper'>
-          <Avatar className='avatar'>
-            <LockOutlinedIcon />
+          <Avatar src={Logo} alt='Siglot' >
+
           </Avatar>
           <Typography component="h1" variant="h5">
             Cadastro de Funcionario

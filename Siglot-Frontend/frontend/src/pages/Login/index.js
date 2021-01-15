@@ -10,7 +10,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 
@@ -22,6 +22,9 @@ import { Alert } from '@material-ui/lab';
 import { withRouter } from 'react-router-dom';
 
 import AuthService from '../../services/auth.service';
+
+import Logo from "../../assets/img/siglot2.jpg";
+
 
 
 class Home extends Component {
@@ -99,8 +102,7 @@ class Home extends Component {
       <Container component="main" maxWidth="xs"  >
         <CssBaseline />
         <div className='paper'>
-          <Avatar className='avatar' >
-            <LockOutlinedIcon />
+          <Avatar src={Logo} alt='Siglot'>
           </Avatar>
           <Typography component="h1" variant="h5">
             Bem vindo ao Siglot
