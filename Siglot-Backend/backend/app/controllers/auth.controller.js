@@ -18,7 +18,6 @@ exports.signup = (req, res) => {
     funcao: req.body.funcao,
     /*senha criptografada*/
     password: bcrypt.hashSync(req.body.password, 8)
-
     /*senha sem criptografia*/
     /*password: req.body.password*/
 
@@ -46,8 +45,6 @@ exports.signup = (req, res) => {
     .catch(err => {
       res.send(500).send({ message: err.message });
     });
-
-
 };
 
 
@@ -66,7 +63,6 @@ exports.signupLot = (req, res) => {
       res.send(500).send({ message: err.message });
     });
 }
-
 
 exports.signin = (req, res) => {
   User.findOne({

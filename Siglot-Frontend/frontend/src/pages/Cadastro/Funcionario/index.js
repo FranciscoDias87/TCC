@@ -148,7 +148,7 @@ class Cadastro extends Component {
                   required
                   fullWidth
                   id="nameFuncioario"
-                  label="Nome da Funcioario"
+                  label="Nome da Funcionario"
                   autoFocus
                   onChange={this.onChangeNomeFuncionario}
                   value={this.state.nameFuncionario}
@@ -250,7 +250,7 @@ class Cadastro extends Component {
             </Grid>
           </Form>
         </div>
-        <Box mt={5}>
+        <Box mt={3}>
           <Copyright />
         </Box>
       </Container >

@@ -1,11 +1,11 @@
 import React from 'react';
-
+import DashboardLayout from '../../layout/Dashboard';
 
 
 function Caixa() {
   return (
     <div>
-      página do caixa
+      <DashboardLayout></DashboardLayout>
     </div>
   );
 }

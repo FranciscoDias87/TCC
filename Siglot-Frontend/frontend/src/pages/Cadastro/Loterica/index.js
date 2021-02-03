@@ -60,7 +60,6 @@ class Cadastro extends Component {
     });
   }
 
-
   onChangeNomeAgencia(e) {
     this.setState({
       nameagencia: e.target.value
@@ -184,8 +183,6 @@ class Cadastro extends Component {
                   onChange={this.onChangeNomeAgencia}
                 />
               </Grid>
-
-
               <Grid item xs={12} >
                 {this.state.message && (
                   <Alert variant='filled'  >
@@ -223,7 +220,7 @@ class Cadastro extends Component {
             </Grid>
           </Form>
         </div>
-        <Box mt={5}>
+        <Box mt={3}>
           <Copyright />
         </Box>
       </Container >
