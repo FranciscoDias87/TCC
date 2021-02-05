@@ -1,37 +1,54 @@
 import React, { useEffect } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
-
+import { Link as RouterLink, useLocation } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import {
   Avatar,
   Box,
   Divider,
+  Drawer,
   Hidden,
   List,
   makeStyles,
   Typography
 } from '@material-ui/core';
-import {
-  BarChart as BarChartIcon
-
-} from 'react-feather'
-
+import Person from '@material-ui/icons/Person';
+import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
+import SettingsIcon from '@material-ui/icons/Settings';
 import NavItem from './NavItem';
 
 const user = {
   avatar: "S",
-  jotTitle: 'SeniorDeveloper',
+  jotTitle: 'Caixa',
   name: 'Francisco'
 }
 
 const items = [
   {
-    href: 'www.globo.com.br',
-    icon: BarChartIcon,
-    title: 'DashBoard'
+    href: '/app/usuario',
+    icons: Person,
+    title: 'Perfil'
+  },
+  {
+    href: '/app/usuario',
+    icons: MonetizationOnIcon,
+    title: 'Caixa'
+  },
+  {
+    href: '/app/config',
+    icons: SettingsIcon,
+    title: 'Configurações'
   }
 ]
 
 const useStyles = makeStyles(() => ({
+  mobileDrawer: {
+    width: 256
+  },
+  desktopDrawer: {
+    width: 256,
+    top: 69,
+    height: 'calc(100% - 64px)'
+  },
   avatar: {
     cursor: 'pointer',
     width: 64,
@@ -40,15 +57,17 @@ const useStyles = makeStyles(() => ({
 }));
 
 
-
 const NavBar = ({ onMobileClose, openMobile }) => {
   const classes = useStyles();
+  const location = useLocation();
 
   useEffect(() => {
     if (openMobile && onMobileClose) {
       onMobileClose();
     }
-  })
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location.pathname]);
 
   const content = (
     <Box
@@ -66,21 +85,19 @@ const NavBar = ({ onMobileClose, openMobile }) => {
           className={classes.avatar}
           component={RouterLink}
           src={user.avatar}
-          to="/"
+          to="/Caixa/usuario"
         />
         <Typography
           className={classes.name}
           color="textPrimary"
           variant="h5"
         >
-
           {user.name}
         </Typography>
         <Typography
           color="textSecondary"
           variant="body2"
         >
-
           {user.jotTitle}
         </Typography>
       </Box>
@@ -92,24 +109,51 @@ const NavBar = ({ onMobileClose, openMobile }) => {
               href={item.href}
               key={item.title}
               title={item.title}
-              icon={item.icon}
+              icon={item.icons}
             />
           ))}
         </List>
       </Box>
+      <Box flexGrow={1} />
+      <Divider />
     </Box>
-
   );
-
 
   return (
     <>
       <Hidden lgUp>
-        {content}
+        <Drawer
+          anchor="left"
+          classes={{ paper: classes.mobileDrawer }}
+          onClose={onMobileClose}
+          open={openMobile}
+          variant="temporary"
+        >
+          {content}
+        </Drawer>
       </Hidden>
-
+      <Hidden mdDown>
+        <Drawer
+          anchor="left"
+          classes={{ paper: classes.desktopDrawer }}
+          open
+          variant="persistent"
+        >
+          {content}
+        </Drawer>
+      </Hidden>
     </>
   );
+};
+
+NavBar.propTypes = {
+  onMobileClose: PropTypes.func,
+  openMobile: PropTypes.bool
+};
+
+NavBar.defaultProps = {
+  onMobileClose: () => { },
+  openMobile: false
 };
 
 export default NavBar;

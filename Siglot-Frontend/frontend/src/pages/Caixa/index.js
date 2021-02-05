@@ -5,7 +5,7 @@ import DashboardLayout from '../../layout/Dashboard';
 function Caixa() {
   return (
     <div>
-      <DashboardLayout></DashboardLayout>
+      <DashboardLayout />
     </div>
   );
 }

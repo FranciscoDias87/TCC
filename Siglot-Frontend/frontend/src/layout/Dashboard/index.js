@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 
 import NavBar from './NavBar';
 import TopBar from './TopBar';
-
 import useStyles from './style';
+
+import Dashboard from '../../views/reports/Dashboard';
+
 
 const DashboardLayout = () => {
   const classes = useStyles();
@@ -19,7 +21,7 @@ const DashboardLayout = () => {
       <div className={classes.wrapper}>
         <div className={classes.contentContainer}>
           <div className={classes.content}>
-
+            <Dashboard />
           </div>
         </div>
       </div>
