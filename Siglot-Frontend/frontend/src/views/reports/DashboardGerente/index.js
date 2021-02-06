@@ -8,12 +8,12 @@ import {
   Grid,
   makeStyles,
 } from '@material-ui/core';
-import FundCaixaAnt from './FundoCaixaAnt';
-import TotalEntradas from './TotalEntradas';
-import TotalSangrias from './TotalSangrias';
-import SaldoCaixa from './SaldoCaixa';
-import Saidas from './Saidas';
-import Entradas from './Entradas';
+
+import Saldo043 from './Saldo043';
+import SaldoCaixa003 from './SaldoCaixa003';
+import TotalCaixas from './TotalCaixas';
+import Diferenca from './Diferencas';
+import LatestOrders from './ValoresCaixasInd';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -44,7 +44,7 @@ const DashboardCaixa = () => {
             xl={3}
             xs={12}
           >
-            <FundCaixaAnt />
+            <Saldo043 />
           </Grid>
           <Grid
             item
@@ -53,7 +53,7 @@ const DashboardCaixa = () => {
             xl={3}
             xs={12}
           >
-            <TotalEntradas />
+            <SaldoCaixa003 />
           </Grid>
           <Grid
             item
@@ -62,7 +62,7 @@ const DashboardCaixa = () => {
             xl={3}
             xs={12}
           >
-            <TotalSangrias />
+            <TotalCaixas />
           </Grid>
           <Grid
             item
@@ -71,34 +71,35 @@ const DashboardCaixa = () => {
             xl={3}
             xs={12}
           >
-            <SaldoCaixa />
+            <Diferenca />
           </Grid>
         </Grid>
       </Container>
       <br></br>
+
       <br></br>
       <Container maxWidth={false}>
         <Grid
           container
-          spacing={3}
+          spacing={4}
         >
           <Grid
             item
-            lg={6}
-            sm={9}
-            xl={3}
+            lg={8}
+            sm={12}
+            xl={9}
             xs={12}
           >
-            <Entradas />
+            <LatestOrders />
           </Grid>
           <Grid
             item
-            lg={6}
-            sm={9}
+            lg={4}
+            sm={6}
             xl={3}
             xs={12}
           >
-            <Saidas />
+
           </Grid>
         </Grid>
 
@@ -127,11 +128,8 @@ const DashboardCaixa = () => {
               </Box>
             </Grid>
           </Grid>
-
         </Container>
       </Container>
-
-
     </Page >
   );
 };
