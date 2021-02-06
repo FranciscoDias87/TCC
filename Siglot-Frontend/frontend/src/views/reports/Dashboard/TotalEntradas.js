@@ -10,7 +10,7 @@ import {
   Typography
 } from '@material-ui/core';
 import MoneyIcon from '@material-ui/icons/LocalAtm';
-import ArrowDownwardRoundedIcon from '@material-ui/icons/ArrowDownwardRounded';
+import ArrowUpwardRoundedIcon from '@material-ui/icons/ArrowUpwardRounded';
 import clsx from 'clsx';
 
 const useStyles = makeStyles((theme) => ({
@@ -18,17 +18,17 @@ const useStyles = makeStyles((theme) => ({
     height: '100%'
   },
   avatar: {
-    backgroundColor: colors.red[600],
+    backgroundColor: colors.green[600],
     height: 56,
     width: 56,
     color: colors.grey
   },
   differenceIcon: {
-    color: colors.red[600],
+    color: colors.green[600],
   }
 }));
 
-const Sangrias = ({ className, ...rest }) => {
+const TotalEntradas = ({ className, ...rest }) => {
   const classes = useStyles();
   return (
     <Card
@@ -47,13 +47,13 @@ const Sangrias = ({ className, ...rest }) => {
               gutterBottom
               variant='h7'
             >
-              Sangrias
+              Suprimentos
             </Typography>
             <Typography
               color='textPrimary'
               variant='h6'
             >
-              R$ 17.000,00
+              R$ 11.000,00
             </Typography>
           </Grid>
           <Grid item>
@@ -67,12 +67,12 @@ const Sangrias = ({ className, ...rest }) => {
           display='flex'
           alignItems='center'
         >
-          <ArrowDownwardRoundedIcon className={classes.differenceIcon} />
-          Saidas no Caixa
+          <ArrowUpwardRoundedIcon className={classes.differenceIcon} />
+          Entrada no Caixa
         </Box>
       </CardContent>
     </Card>
   );
 };
 
-export default Sangrias;
+export default TotalEntradas;

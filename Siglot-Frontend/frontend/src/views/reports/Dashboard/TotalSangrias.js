@@ -10,7 +10,7 @@ import {
   Typography
 } from '@material-ui/core';
 import MoneyIcon from '@material-ui/icons/LocalAtm';
-import ImportExportRoundedIcon from '@material-ui/icons/ImportExportRounded';
+import ArrowDownwardRoundedIcon from '@material-ui/icons/ArrowDownwardRounded';
 import clsx from 'clsx';
 
 const useStyles = makeStyles((theme) => ({
@@ -18,17 +18,17 @@ const useStyles = makeStyles((theme) => ({
     height: '100%'
   },
   avatar: {
-    backgroundColor: colors.green[600],
+    backgroundColor: colors.red[600],
     height: 56,
     width: 56,
     color: colors.grey
   },
   differenceIcon: {
-    color: colors.green[600],
+    color: colors.red[600],
   }
 }));
 
-const SaldoCaixaAnterior = ({ className, ...rest }) => {
+const TotalSangrias = ({ className, ...rest }) => {
   const classes = useStyles();
   return (
     <Card
@@ -47,13 +47,13 @@ const SaldoCaixaAnterior = ({ className, ...rest }) => {
               gutterBottom
               variant='h7'
             >
-              Saldo do Dia
+              Sangrias
             </Typography>
             <Typography
               color='textPrimary'
               variant='h6'
             >
-              R$ 23.000,00
+              R$ 5.000,00
             </Typography>
           </Grid>
           <Grid item>
@@ -67,12 +67,12 @@ const SaldoCaixaAnterior = ({ className, ...rest }) => {
           display='flex'
           alignItems='center'
         >
-          <ImportExportRoundedIcon className={classes.differenceIcon} />
-          Novo Fundo de Caixa
+          <ArrowDownwardRoundedIcon className={classes.differenceIcon} />
+          Saidas no Caixa
         </Box>
       </CardContent>
     </Card>
   );
 };
 
-export default SaldoCaixaAnterior;
+export default TotalSangrias;

@@ -1,30 +1,25 @@
 import React from 'react';
 import Page from '../../../components/Page';
 import {
-
-  Card,
-  CardHeader,
   Container,
   Divider,
   Grid,
   makeStyles,
-
-
 } from '@material-ui/core';
 import FundCaixaAnt from './FundoCaixaAnt';
-import Entradas from './Entradas';
-import Sangrias from './Sangrias';
+import TotalEntradas from './TotalEntradas';
+import TotalSangrias from './TotalSangrias';
 import SaldoCaixa from './SaldoCaixa';
+import Saidas from './Saidas';
+import Entradas from './Entradas';
 
 
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: theme.palette.background.default,
-    minHeight: '100%',
     paddingBottom: theme.spacing(3),
     paddingTop: theme.spacing(3)
   }
-
 }));
 
 const Dashboard = () => {
@@ -56,7 +51,7 @@ const Dashboard = () => {
             xl={3}
             xs={12}
           >
-            <Entradas />
+            <TotalEntradas />
           </Grid>
           <Grid
             item
@@ -65,7 +60,7 @@ const Dashboard = () => {
             xl={3}
             xs={12}
           >
-            <Sangrias />
+            <TotalSangrias />
           </Grid>
           <Grid
             item
@@ -79,18 +74,31 @@ const Dashboard = () => {
         </Grid>
       </Container>
       <br></br>
+      <Divider />
+      <br></br>
       <Container maxWidth={false}>
         <Grid
           container
+          spacing={3}
         >
-          <Card >
-            <CardHeader
-              subheader='Informe os valores de entrada no Caixa'
-              title='Entradas'
-            />
-            <Divider />
-
-          </Card>
+          <Grid
+            item
+            lg={6}
+            sm={9}
+            xl={3}
+            xs={12}
+          >
+            <Entradas />
+          </Grid>
+          <Grid
+            item
+            lg={6}
+            sm={9}
+            xl={3}
+            xs={12}
+          >
+            <Saidas />
+          </Grid>
         </Grid>
       </Container>
 
