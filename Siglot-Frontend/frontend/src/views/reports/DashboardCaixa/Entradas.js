@@ -5,37 +5,43 @@ import {
   Card,
   CardContent,
   CardHeader,
-  Container, Divider, Grid, Input, InputAdornment, InputLabel, TextField
+  Container,
+  Divider,
+  Grid,
+  Input,
+  InputAdornment,
+  InputLabel,
+  TextField
 } from '@material-ui/core';
 
-const selSaida = [
+const selEntrada = [
   {
-    valor: 'Transferencia',
+    value: 'Transferencia',
     label: 'Transferencia'
   },
   {
-    valor: 'Fatura Energia',
-    label: 'Fatura Energia'
+    value: 'Banco',
+    label: 'Banco'
   },
   {
-    valor: 'Fatura Agua',
-    label: 'Fatura Agua'
+    value: 'Tele Sena',
+    label: 'Tele Sena'
   },
   {
-    valor: 'Loja Basico',
-    label: 'Loja Basico'
+    value: 'Premio de Federal',
+    label: 'Premio de Federal'
   },
-];
+
+]
 
 
-
-function Saidas() {
+const Entradas = () => {
 
   const [values, setValues] = useState({
-    selSaida: '',
-    selSaida2: '',
+    selEntrada: '',
+    selEntrada2: '',
     valor: '',
-    valor2: '',
+    valor2: ''
   });
 
   const handleChange = (e) => {
@@ -63,8 +69,8 @@ function Saidas() {
           <Grid >
             <Card>
               <CardHeader
-                subheader='Informe o valor das saidas'
-                title='Saidas'
+                subheader='Informe o valor das entradas'
+                title='Entradas'
               />
               <Divider />
               <CardContent>
@@ -79,16 +85,16 @@ function Saidas() {
                   >
                     <TextField
                       fullWidth
-                      label='Selecione'
-                      name='selSaida'
+                      label='Tipo Entrada'
+                      name='selEntrada'
+                      require
                       onChange={handleChange}
-                      required
                       select
                       SelectProps={{ native: true }}
-                      value={values.selSaida}
+                      value={values.selEntrada}
                       variant='outlined'
                     >
-                      {selSaida.map((option) => (
+                      {selEntrada.map((option) => (
                         <option
                           key={option.value}
                           value={option.value}
@@ -98,15 +104,17 @@ function Saidas() {
                       ))}
                     </TextField>
                   </Grid>
+
                   <Grid
                     item
                     md={6}
                     xs={12}
                   >
-                    <InputLabel htmlFor="valor"
+                    <InputLabel
+                      htmlFor="valor"
                     >
                       Valor
-                    </InputLabel>
+                        </InputLabel>
                     <Input
                       fullWidth
                       id="valor"
@@ -118,6 +126,11 @@ function Saidas() {
                     />
                   </Grid>
                 </Grid>
+
+              </CardContent>
+              <Divider />
+              <CardContent>
+
                 <Grid
                   container
                   spacing={3}
@@ -129,16 +142,16 @@ function Saidas() {
                   >
                     <TextField
                       fullWidth
-                      label='Selecione'
-                      name='selSaida2'
+                      label='Tipo Entrada'
+                      name='selEntrada2'
+                      require
                       onChange={handleChange}
-                      required
                       select
                       SelectProps={{ native: true }}
-                      value={values.selSaida2}
+                      value={values.selEntrada2}
                       variant='outlined'
                     >
-                      {selSaida.map((option) => (
+                      {selEntrada.map((option) => (
                         <option
                           key={option.value}
                           value={option.value}
@@ -148,6 +161,7 @@ function Saidas() {
                       ))}
                     </TextField>
                   </Grid>
+
                   <Grid
                     item
                     md={6}
@@ -160,7 +174,7 @@ function Saidas() {
                     </InputLabel>
                     <Input
                       fullWidth
-                      id="valor"
+                      id="valors"
                       name="valor2"
                       onChange={handleChange}
                       value={values.valor2}
@@ -169,6 +183,9 @@ function Saidas() {
                     />
                   </Grid>
                 </Grid>
+
+
+
               </CardContent>
               <Divider />
               <Box
@@ -186,9 +203,11 @@ function Saidas() {
             </Card>
           </Grid>
         </Grid>
-      </Grid>
-    </Container>
-  );
-};
+      </Grid >
 
-export default Saidas;
+    </Container >
+
+  );
+}
+
+export default Entradas;

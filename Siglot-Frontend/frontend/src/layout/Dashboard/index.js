@@ -4,7 +4,7 @@ import NavBar from './NavBar';
 import TopBar from './TopBar';
 import useStyles from './style';
 
-import Dashboard from '../../views/reports/Dashboard';
+import Dashboard from '../../views/reports/DashboardCaixa';
 
 
 const DashboardLayout = () => {
