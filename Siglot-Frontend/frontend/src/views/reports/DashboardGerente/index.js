@@ -13,7 +13,10 @@ import Saldo043 from './Saldo043';
 import SaldoCaixa003 from './SaldoCaixa003';
 import TotalCaixas from './TotalCaixas';
 import Diferenca from './Diferencas';
-import LatestOrders from './ValoresCaixasInd';
+import ValoresCaixasId from './ValoresCaixasId';
+import Date from './Date';
+import InsesirSaldo003 from './InserirSaldo003';
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -76,6 +79,22 @@ const DashboardCaixa = () => {
         </Grid>
       </Container>
       <br></br>
+      <Container >
+        <Grid
+          container
+          spacing={3}
+        >
+          <Grid
+            item
+            lg={8}
+            sm={12}
+            xl={9}
+            xs={12}
+          >
+            <Date />
+          </Grid>
+        </Grid>
+      </Container>
 
       <br></br>
       <Container maxWidth={false}>
@@ -85,21 +104,21 @@ const DashboardCaixa = () => {
         >
           <Grid
             item
-            lg={8}
+            lg={7}
             sm={12}
             xl={9}
             xs={12}
           >
-            <LatestOrders />
+            <ValoresCaixasId />
           </Grid>
           <Grid
             item
-            lg={4}
+            lg={5}
             sm={6}
             xl={3}
             xs={12}
           >
-
+            <InsesirSaldo003 />
           </Grid>
         </Grid>
 

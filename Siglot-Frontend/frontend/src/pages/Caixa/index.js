@@ -1,5 +1,5 @@
 import React from 'react';
-import DashboardLayout from '../../layout/Dashboard';
+import DashboardLayout from '../../layout/DashboardCaixa';
 
 
 function Caixa() {
