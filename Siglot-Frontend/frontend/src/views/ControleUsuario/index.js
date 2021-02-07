@@ -1,15 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Box,
   Container,
-  Grid,
   makeStyles
 } from '@material-ui/core';
-import Page from '../../../components/Page';
-import Password from './Password';
-
-
-
+import Page from '../../components/Page';
+import Results from './Results';
+import Toolbar from './Toolbar';
+import data from './data';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,29 +17,23 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-
-const ConfigView = () => {
+const CustomerListView = () => {
   const classes = useStyles();
+  const [customers] = useState(data);
+
   return (
     <Page
       className={classes.root}
-      title='Configurações'
+      title="Customers"
     >
       <Container maxWidth={false}>
-        <Grid
-          item
-          lg={6}
-          sm={6}
-          xl={3}
-          xs={12}
-        >
-          <Box mt={3}>
-            <Password />
-          </Box>
-        </Grid>
+        <Toolbar />
+        <Box mt={3}>
+          <Results customers={customers} />
+        </Box>
       </Container>
     </Page>
   );
 };
 
-export default ConfigView;
+export default CustomerListView;

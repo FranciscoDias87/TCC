@@ -127,11 +127,8 @@ const DashboardCaixa = () => {
               </Box>
             </Grid>
           </Grid>
-
         </Container>
       </Container>
-
-
     </Page >
   );
 };

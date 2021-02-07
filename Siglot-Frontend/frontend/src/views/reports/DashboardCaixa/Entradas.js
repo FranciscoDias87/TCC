@@ -183,9 +183,6 @@ const Entradas = () => {
                     />
                   </Grid>
                 </Grid>
-
-
-
               </CardContent>
               <Divider />
               <Box

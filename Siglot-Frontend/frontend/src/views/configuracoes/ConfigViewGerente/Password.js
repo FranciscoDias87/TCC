@@ -28,8 +28,8 @@ const Password = ({ className, ...rest }) => {
     >
       <Card>
         <CardHeader
-          subheader='Atualizar Senha'
           title='Senha'
+          subheader='Atualize sua senha'
         />
         <Divider />
         <CardContent>

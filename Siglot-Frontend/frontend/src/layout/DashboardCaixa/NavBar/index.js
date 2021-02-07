@@ -14,6 +14,7 @@ import {
 import Person from '@material-ui/icons/Person';
 import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import SettingsIcon from '@material-ui/icons/Settings';
+import FindReplaceIcon from '@material-ui/icons/FindReplace';
 import NavItem from './NavItem';
 
 const user = {
@@ -31,7 +32,12 @@ const items = [
   {
     href: '/app/usuario',
     icons: MonetizationOnIcon,
-    title: 'Caixa'
+    title: 'Abrir Caixa'
+  },
+  {
+    href: '/app/usuario',
+    icons: FindReplaceIcon,
+    title: 'Consultar Caixas'
   },
   {
     href: '/app/config',

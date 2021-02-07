@@ -14,11 +14,12 @@ import {
 import Person from '@material-ui/icons/Person';
 import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import SettingsIcon from '@material-ui/icons/Settings';
+import PeopleIcon from '@material-ui/icons/People';
 import NavItem from './NavItem';
 
 const user = {
   avatar: "S",
-  jotTitle: 'Caixa',
+  jotTitle: 'Gerente',
   name: 'Ligia'
 }
 
@@ -29,12 +30,17 @@ const items = [
     title: 'Perfil'
   },
   {
-    href: '/Controle',
+    href: '/Funanceiro',
     icons: MonetizationOnIcon,
-    title: 'Conrole'
+    title: 'Controle Finaceiro'
   },
   {
-    href: '/app/config',
+    href: '/Usuarios',
+    icons: PeopleIcon,
+    title: 'Funcionarios'
+  },
+  {
+    href: `${user}/config`,
     icons: SettingsIcon,
     title: 'Configurações'
   }
@@ -85,7 +91,7 @@ const NavBar = ({ onMobileClose, openMobile }) => {
           className={classes.avatar}
           component={RouterLink}
           src={user.avatar}
-          to="/Caixa/usuario"
+          to="/"
         />
         <Typography
           className={classes.name}
